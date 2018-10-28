@@ -6,6 +6,10 @@ public class BookDTO extends BookMinDTO{
     private AuthorMinDTO author;
     private String genre;
     private Integer publishYear;
+    private Cover cover;
+    private Integer price;
+    private String language;
+
 
     public AuthorMinDTO getAuthor() {
         return author;
@@ -54,8 +58,4 @@ public class BookDTO extends BookMinDTO{
     public void setLanguage(String language) {
         this.language = language;
     }
-
-    private Cover cover;
-    private Integer price;
-    private String language;
 }
