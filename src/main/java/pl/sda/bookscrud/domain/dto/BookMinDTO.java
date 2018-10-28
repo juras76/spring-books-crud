@@ -1,20 +1,11 @@
 package pl.sda.bookscrud.domain.dto;
 
-public class BookMinDTO {
-    private Long id;
+public class BookMinDTO extends IdDTO {
     private String title;
 
     public BookMinDTO(Long id, String title) {
-        this.id = id;
+        super(id);
         this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
