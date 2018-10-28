@@ -39,4 +39,21 @@ public class AuthorService {
         a.setAlive(dto.getAlive());
         return a;
     }
+
+    public AuthorDTO getAuthor(long id){
+        Author author = authorRepository.findById(id).orElse(null);
+        AuthorDTO dto = new AuthorDTO();
+        dto.setId(author.getId());
+        dto.setFirstName(author.getFirstName());
+        dto.setLastName(author.getLastName());
+        dto.setAlive(author.getAlive());
+        dto.setGender(author.getGender());
+        dto.setBooks(author.getBooks()
+                .stream()
+                .map(BookService.BOOK_BOOK_MIN_DTO_FUNCTION).collect(Collectors.toList()));
+
+        return dto;
+
+
+    }
 }
