@@ -44,6 +44,9 @@ public class AuthorService {
 
     public AuthorDTO getAuthor(Long id) {
         Author author = authorRepository.findById(id).orElse(null);
+        if (author == null) {
+            return null;
+        }
         AuthorDTO dto = new AuthorDTO();
         dto.setId(author.getId());
         dto.setFirstName(author.getFirstName());

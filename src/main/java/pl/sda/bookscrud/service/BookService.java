@@ -1,6 +1,8 @@
 package pl.sda.bookscrud.service;
 
 import org.springframework.stereotype.Service;
+import pl.sda.bookscrud.domain.dto.AuthorMinDTO;
+import pl.sda.bookscrud.domain.dto.BookDTO;
 import pl.sda.bookscrud.domain.dto.BookMinDTO;
 import pl.sda.bookscrud.domain.entity.Book;
 import pl.sda.bookscrud.repository.BookRepository;
@@ -23,6 +25,26 @@ public class BookService {
         return bookRepository.findAll().stream()
                 .map(BOOK_BOOK_MIN_DTO_FUNCTION)
                 .collect(Collectors.toList());
+    }
+    public BookDTO getBook(Long id){
+        Book book=bookRepository.findById(id).orElse(null));
+        if (book == null) {
+            return null;
+        }
+        BookDTO dto=new BookDTO();
+        dto.setId(book.getId());
+        AuthorMinDTO authorMinDTO=new AuthorMinDTO();
+        authorMinDTO.setId(book.getAuthor().getId());
+        authorMinDTO.setFirstName(book.getAuthor().getFirstName());
+        authorMinDTO.setLastName(book.getAuthor().getLastName());
+        dto.setAuthor(authorMinDTO);
+        dto.setCover(book.getCover());
+        dto.setGenre(book.getGenre());
+        dto.setLanguage(book.getLanguage());
+        dto.setPrice(book.getPrice());
+        dto.setPublishYear(book.getPublishYear());
+        return dto;
+
     }
 
 

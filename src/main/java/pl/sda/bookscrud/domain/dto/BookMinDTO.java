@@ -8,6 +8,9 @@ public class BookMinDTO extends IdDTO {
         this.title = title;
     }
 
+    public BookMinDTO() {
+    }
+
     public String getTitle() {
         return title;
     }
