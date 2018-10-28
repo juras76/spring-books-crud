@@ -27,7 +27,7 @@ public class BookService {
                 .collect(Collectors.toList());
     }
     public BookDTO getBook(Long id){
-        Book book=bookRepository.findById(id).orElse(null));
+        Book book=bookRepository.findById(id).orElse(null);
         if (book == null) {
             return null;
         }
