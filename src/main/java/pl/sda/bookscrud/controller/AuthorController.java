@@ -35,11 +35,18 @@ public class AuthorController {
     public IdDTO create(@RequestBody AuthorDTO dto) {
         return authorService.create(dto);
     }
+
     @GetMapping("/get/{id}")
     @ResponseBody
     public AuthorDTO get(@PathVariable("id")Long id){
         return authorService.getAuthor(id);
 
+    }
+
+    @GetMapping("/list/alive")
+    @ResponseBody
+    public List<AuthorMinDTO> listAlive() {
+        return authorService.aliveAuthors();
     }
 
 }

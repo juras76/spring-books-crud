@@ -24,4 +24,6 @@ public class BookService {
                 .map(BOOK_BOOK_MIN_DTO_FUNCTION)
                 .collect(Collectors.toList());
     }
+
+
 }

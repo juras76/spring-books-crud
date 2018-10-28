@@ -8,11 +8,13 @@ import pl.sda.bookscrud.domain.entity.Author;
 import pl.sda.bookscrud.repository.AuthorRepository;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
 
+    static final Function<Author, AuthorMinDTO> AUTHOR_AUTHOR_MIN_DTO_FUNCTION = a -> new AuthorMinDTO(a.getId(), a.getFirstName(), a.getLastName());
     private final AuthorRepository authorRepository;
 
     public AuthorService(AuthorRepository authorRepository) {
@@ -40,7 +42,7 @@ public class AuthorService {
         return a;
     }
 
-    public AuthorDTO getAuthor(long id){
+    public AuthorDTO getAuthor(Long id) {
         Author author = authorRepository.findById(id).orElse(null);
         AuthorDTO dto = new AuthorDTO();
         dto.setId(author.getId());
@@ -50,9 +52,17 @@ public class AuthorService {
         dto.setGender(author.getGender());
         dto.setBooks(author.getBooks()
                 .stream()
-                .map(BookService.BOOK_BOOK_MIN_DTO_FUNCTION).collect(Collectors.toList()));
+                .map(BookService.BOOK_BOOK_MIN_DTO_FUNCTION)
+                .collect(Collectors.toList()));
 
         return dto;
+    }
+
+    public List<AuthorMinDTO> aliveAuthors(){
+        return authorRepository.findByAliveTrue()
+            .stream()
+            .map(AUTHOR_AUTHOR_MIN_DTO_FUNCTION)
+            .collect(Collectors.toList());
 
 
     }
